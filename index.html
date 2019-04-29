@@ -240,6 +240,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/Docker-Installation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cleo">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/29/Docker-Installation/" itemprop="url">Ubuntu 18.04 LTS 安装 Docker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-29T20:43:28+08:00">
+                2019-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>  本篇博客参考Docker官网，采用配置Repository方式在Ubuntu 18.04 LTS下安装<a href="https://docs.docker.com/" target="_blank" rel="noopener">Docker CE</a></p>
+<h3 id="添加Repository"><a href="#添加Repository" class="headerlink" title="添加Repository"></a>添加Repository</h3><ul>
+<li><strong>更新软件源</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>安装镜像允许apt使用基于HTTPS的repository</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install \</span></span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg-agent \</span><br><span class="line">    software-properties-common</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>添加Docker官方GPG密钥(使用中科大软件源)</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>设置Docker版本为稳定版(使用中科大软件源)</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository \</span><br><span class="line"><span class="string">"deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span></span><br><span class="line"><span class="string"><span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">stable"</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install docker-ce docker-ce-cli containerd.io</span></span><br></pre></td></tr></table></figure>
+<h3 id="验证安装成功与否"><a href="#验证安装成功与否" class="headerlink" title="验证安装成功与否"></a>验证安装成功与否</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker run hello-world</span></span><br></pre></td></tr></table></figure>
+<h3 id="将当前用户添加到docker用户组避免使用sudo命令"><a href="#将当前用户添加到docker用户组避免使用sudo命令" class="headerlink" title="将当前用户添加到docker用户组避免使用sudo命令"></a>将当前用户添加到docker用户组避免使用<code>sudo</code>命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo groupadd docker</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo usermod -aG docker <span class="variable">$USER</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> reboot</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置docker为开机启动"><a href="#设置docker为开机启动" class="headerlink" title="设置docker为开机启动"></a>设置docker为开机启动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl <span class="built_in">enable</span> docker.service</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置加速器加速下载镜像的速度"><a href="#配置加速器加速下载镜像的速度" class="headerlink" title="配置加速器加速下载镜像的速度"></a>配置加速器加速下载镜像的速度</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -401,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
