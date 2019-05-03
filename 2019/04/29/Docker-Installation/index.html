@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="本篇博客参考Docker官网，采用配置Repository方式在Ubuntu 18.04 LTS下安装Docker CE 添加Repository 更新软件源  1$ sudo apt-get update  安装镜像允许apt使用基于HTTPS的repository  123456$ sudo apt-get install \    apt-transport-https \    ca-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-29T12:45:44.171Z">
+<meta property="og:updated_time" content="2019-05-03T10:40:18.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 18.04 LTS 安装 Docker">
 <meta name="twitter:description" content="本篇博客参考Docker官网，采用配置Repository方式在Ubuntu 18.04 LTS下安装Docker CE 添加Repository 更新软件源  1$ sudo apt-get update  安装镜像允许apt使用基于HTTPS的repository  123456$ sudo apt-get install \    apt-transport-https \    ca-">
@@ -319,11 +319,11 @@
 <ul>
 <li><strong>添加Docker官方GPG密钥(使用中科大软件源)</strong></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>设置Docker版本为稳定版(使用中科大软件源)</strong></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository \</span><br><span class="line"><span class="string">"deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span></span><br><span class="line"><span class="string"><span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">stable"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository \</span><br><span class="line">  <span class="string">"deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \</span></span><br><span class="line"><span class="string">  <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">  stable"</span></span><br></pre></td></tr></table></figure>
 <h3 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install docker-ce docker-ce-cli containerd.io</span></span><br></pre></td></tr></table></figure>
 <h3 id="验证安装成功与否"><a href="#验证安装成功与否" class="headerlink" title="验证安装成功与否"></a>验证安装成功与否</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker run hello-world</span></span><br></pre></td></tr></table></figure>
 <h3 id="将当前用户添加到docker用户组避免使用sudo命令"><a href="#将当前用户添加到docker用户组避免使用sudo命令" class="headerlink" title="将当前用户添加到docker用户组避免使用sudo命令"></a>将当前用户添加到docker用户组避免使用<code>sudo</code>命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo groupadd docker</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo usermod -aG docker <span class="variable">$USER</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> reboot</span></span><br></pre></td></tr></table></figure>
